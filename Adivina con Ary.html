@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <!-- Botón que redirige a otro sitio web -->
+    <button id="tiket" class="styled-button">
+        <a href="pinpongcon Ari.html">Juego Ping Pong</a>
+    </button>
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Juego de Adivinanza de Números</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            height: 100vh;
+
+            margin: 0;
+
+            background-color: #f0f0f0;
+
+        }
+
+        .container {
+
+            text-align: center;
+
+            background-color: white;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        input {
+
+            padding: 10px;
+
+            font-size: 16px;
+
+            margin: 10px;
+
+            border-radius: 4px;
+
+            border: 1px solid #ccc;
+
+        }
+
+        button {
+
+            padding: 10px 20px;
+
+            font-size: 16px;
+
+            border: none;
+
+            border-radius: 4px;
+
+            background-color: #28a745;
+
+            color: white;
+
+            cursor: pointer;
+
+        }
+
+        button:hover {
+
+            background-color: #218838;
+
+        }
+
+        #result {
+
+            margin-top: 20px;
+
+            font-size: 18px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Juego de Adivinanza de Números</h1>
+
+        <p>Adivina el número entre 1 y 10</p>
+
+        <input type="number" id="guess" min="1" max="10">
+
+        <button onclick="checkGuess()">Adivinar</button>
+
+        <div id="result"></div>
+
+    </div>
+
+
+    <script>
+
+        // Generar un número aleatorio entre 1 y 10
+
+        const secretNumber = Math.floor(Math.random() * 10) + 1;
+
+
+        function checkGuess() {
+
+            // Obtener el valor del input
+
+            const userGuess = parseInt(document.getElementById('guess').value);
+
+
+            // Obtener el elemento para mostrar el resultado
+
+            const resultDiv = document.getElementById('result');
+
+
+            // Verificar la adivinanza
+
+            if (userGuess === secretNumber) {
+
+                resultDiv.textContent = "¡Correcto! Has adivinado el número.";
+
+                resultDiv.style.color = "green";
+
+            } else {
+
+                resultDiv.textContent = "Incorrecto. Intenta de nuevo.";
+
+                resultDiv.style.color = "red";
+
+            }
+
+        }
+
+    </script>
+<!-- Botón que redirige a otro sitio web -->
+<button id="tiket" class="styled-button">
+    <a href="vivorita.html">Snake</a>
+</button>
+
+</body>
+
+</html>

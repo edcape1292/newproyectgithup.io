@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <!-- Botón que redirige a otro sitio web -->
+    <button id="tiket" class="styled-button">
+        <a href="Adivina con Ary.html">Adivina el numero</a>
+    </button>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Juego de Pong</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            padding: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background-color: #000;
+
+        }
+
+        canvas {
+
+            background-color: #111;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <canvas id="pongCanvas" width="800" height="600"></canvas>
+
+    <script>
+
+        // Obtener el elemento canvas y el contexto de dibujo
+
+        const canvas = document.getElementById('pongCanvas');
+
+        const ctx = canvas.getContext('2d');
+
+
+        // Configuración del juego
+
+        const paddleWidth = 10, paddleHeight = 100, ballSize = 10;
+
+        let leftPaddleY = (canvas.height - paddleHeight) / 2;
+
+        let rightPaddleY = (canvas.height - paddleHeight) / 2;
+
+        let ballX = canvas.width / 2, ballY = canvas.height / 2;
+
+        let ballSpeedX = 5, ballSpeedY = 3;
+
+        const paddleSpeed = 20;
+
+
+        function drawPaddle(x, y) {
+
+            ctx.fillStyle = '#fff';
+
+            ctx.fillRect(x, y, paddleWidth, paddleHeight);
+
+        }
+
+
+        function drawBall(x, y) {
+
+            ctx.beginPath();
+
+            ctx.arc(x, y, ballSize, 0, Math.PI * 2);
+
+            ctx.fillStyle = '#fff';
+
+            ctx.fill();
+
+            ctx.closePath();
+
+        }
+
+
+        function update() {
+
+            // Movimiento de la pelota
+
+            ballX += ballSpeedX;
+
+            ballY += ballSpeedY;
+
+
+            // Rebote en los bordes superior e inferior
+
+            if (ballY - ballSize < 0 || ballY + ballSize > canvas.height) {
+
+                ballSpeedY = -ballSpeedY;
+
+            }
+
+
+            // Rebote en las palas
+
+            if (ballX - ballSize < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) {
+
+                ballSpeedX = -ballSpeedX;
+
+            }
+
+            if (ballX + ballSize > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight) {
+
+                ballSpeedX = -ballSpeedX;
+
+            }
+
+
+            // Movimiento de la pala derecha (IA simple)
+
+            if (ballY > rightPaddleY + paddleHeight / 2) {
+
+                rightPaddleY += paddleSpeed ;
+
+            } else {
+
+                rightPaddleY -= paddleSpeed;
+
+            }
+
+
+            // Evitar que la pala se salga del canvas
+
+            if (rightPaddleY < 0) rightPaddleY = 0;
+
+            if (rightPaddleY + paddleHeight > canvas.height) rightPaddleY = canvas.height - paddleHeight;
+
+
+            // Condición de pérdida
+
+            if (ballX - ballSize < 0 || ballX + ballSize > canvas.width) {
+
+                ballX = canvas.width / 2;
+
+                ballY = canvas.height / 2;
+
+                ballSpeedX = -ballSpeedX;
+
+            }
+
+        }
+
+
+        function draw() {
+
+            // Limpiar el canvas
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+            // Dibujar las palas y la pelota
+
+            drawPaddle(0, leftPaddleY);
+
+            drawPaddle(canvas.width - paddleWidth, rightPaddleY);
+
+            drawBall(ballX, ballY);
+
+        }
+
+
+        function gameLoop() {
+
+            update();
+
+            draw();
+
+            requestAnimationFrame(gameLoop);
+
+        }
+
+
+        // Movimiento de la pala izquierda con las teclas
+
+        document.addEventListener('keydown', (event) => {
+
+            if (event.key === 'ArrowUp') {
+
+                leftPaddleY -= paddleSpeed;
+
+            } else if (event.key === 'ArrowDown') {
+
+                leftPaddleY += paddleSpeed;
+
+            }
+
+
+            // Evitar que la pala se salga del canvas
+
+            if (leftPaddleY < 0) leftPaddleY = 0;
+
+            if (leftPaddleY + paddleHeight > canvas.height) leftPaddleY = canvas.height - paddleHeight;
+
+        });
+
+
+        // Iniciar el juego
+
+        gameLoop();
+
+    </script>
+<!-- Botón que redirige a otro sitio web -->
+
+<button id="tiket" class="styled-button">
+    <a href="vivorita.html">Snake</a>
+</button>
+</body>
+
+</html>

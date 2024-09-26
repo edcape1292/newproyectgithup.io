@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .cart-details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        .cart-details h2 {
+            margin-top: 0;
+        }
+        .cart-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cart-details li {
+            margin-bottom: 10px;
+        }
+        .total {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Confirmación de Compra</h1>
+    <div class="cart-details">
+        <h2>Detalles de su Compra</h2>
+        <ul id="cartItems"></ul>
+        <p class="total">Total a Pagar: <span id="totalPrice"></span> MXN</p>
+        <button onclick="window.location.href='index principal.html'">Volver a Inicio</button>
+    </div>
+
+    <script>
+        // Obtener los datos del carrito de localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalPrice = localStorage.getItem('totalPrice') || 0;
+
+        // Mostrar los artículos en la página
+        const cartItems = document.getElementById('cartItems');
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.product} - $${item.price} MXN`;
+            cartItems.appendChild(li);
+        });
+
+        // Mostrar el total
+        document.getElementById('totalPrice').textContent = totalPrice;
+    </script>
+</body>
+</html>
